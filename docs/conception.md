@@ -13,7 +13,7 @@ Ce diagramme répond à la question : **qui fait quoi avec l'application ?**
 ```mermaid
 flowchart LR
     E((Étudiant))
-    IA((IA coach<br/>Claude))
+    IA((IA coach<br/>Gemini))
 
     subgraph App[Application InternLog]
         UC1([Renseigner mon stage])
@@ -130,13 +130,13 @@ flowchart LR
     UI[Interface Streamlit<br/>app.py] --> DB[(SQLite<br/>internlog.db)]
     UI --> DOC[Lecture PDF / Word<br/>documents.py]
     UI --> COACH[Coach IA<br/>coach.py]
-    COACH --> API[API Claude]
+    COACH --> API[API Gemini<br/>ou API Claude]
 ```
 
 - **Python + Streamlit** pour l'interface : une page web sans HTML à écrire.
 - **SQLite** pour les données : un seul fichier, aucune installation.
 - **pypdf / python-docx** pour lire le modèle et la grille.
-- **API Claude** pour le coach.
+- **API Gemini** (gratuite) pour le coach. On peut passer à l'API Claude en changeant un seul réglage.
 
 ---
 

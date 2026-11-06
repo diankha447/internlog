@@ -17,10 +17,14 @@ La conception (diagrammes UML) se trouve dans [docs/conception.md](docs/concepti
    source .venv/bin/activate      # Windows : .venv\Scripts\activate
    pip install -r requirements.txt
    ```
-3. Ajoute ta clé API Claude (à créer sur https://platform.claude.com) :
+3. Récupère une clé Gemini gratuite :
+   - Va sur https://aistudio.google.com/apikey et connecte-toi avec ton compte Google.
+   - Clique sur « Create API key » (Créer une clé API), puis copie la clé.
+   - Dans le terminal :
    ```bash
-   export ANTHROPIC_API_KEY="ta-clé"     # Windows : set ANTHROPIC_API_KEY=ta-clé
+   export GEMINI_API_KEY="ta-clé"     # Windows : set GEMINI_API_KEY=ta-clé
    ```
+   Ne mets jamais cette clé dans un fichier envoyé sur GitHub.
 4. Lance :
    ```bash
    streamlit run app.py
@@ -28,3 +32,17 @@ La conception (diagrammes UML) se trouve dans [docs/conception.md](docs/concepti
    La page s'ouvre dans ton navigateur.
 
 Les données sont enregistrées dans le fichier `internlog.db`, à côté de l'application.
+
+## Changer d'IA
+
+Par défaut, le coach utilise **Google Gemini** (offre gratuite, avec un nombre limité de demandes par minute et par jour). Si la limite est atteinte, l'application te demande d'attendre un peu.
+
+Attention : avec l'offre gratuite, Google peut utiliser ce que tu envoies pour améliorer ses produits. Évite d'écrire des informations confidentielles de l'entreprise dans le journal.
+
+Pour utiliser Claude à la place (payant) :
+```bash
+export INTERNLOG_IA=claude
+export ANTHROPIC_API_KEY="ta-clé"
+```
+
+Tu peux aussi choisir un autre modèle Gemini avec `GEMINI_MODEL` (par défaut : `gemini-flash-latest`).

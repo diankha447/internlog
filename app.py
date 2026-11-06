@@ -2,7 +2,6 @@
 
 import datetime as dt
 
-import anthropic
 import streamlit as st
 
 from internlog import coach, db
@@ -154,14 +153,8 @@ with tab_rapport:
         with st.spinner("Le coach réfléchit..."):
             try:
                 reponse = coach.ask_coach(demande, contexte, choix["titre"], brouillon)
-            except anthropic.AuthenticationError:
-                st.error("Clé API manquante ou invalide. Vérifie ANTHROPIC_API_KEY (voir le README).")
-                st.stop()
-            except anthropic.APIConnectionError:
-                st.error("Impossible de joindre l'API. Vérifie ta connexion internet.")
-                st.stop()
-            except anthropic.APIStatusError as err:
-                st.error(f"Erreur de l'API ({err.status_code}). Réessaie dans un moment.")
+            except coach.CoachError as err:
+                st.error(str(err))
                 st.stop()
         with db.connect() as c:
             db.save_exchange(c, choix["id"], demande, reponse)
